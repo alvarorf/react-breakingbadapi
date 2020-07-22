@@ -38,4 +38,4 @@ To build this project, I used:
 
 ## Screenshot
 
-![Screenshot](./screenshot.png")
+![Screenshot](/screenshot.png")
