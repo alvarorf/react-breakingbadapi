@@ -1,68 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### React-breakingbadapi
 
-## Available Scripts
+Hi, welcome to my React-breakingbadapi project. Please see the live version [here](https://www.react-breakingbadapi.tk).
 
-In the project directory, you can run:
+This website is meant as a sample project.
 
-### `npm start`
+It uses React and is backendless. It is served via Nginx in an AWS EC2 instance.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### How does it work?
+This React app has three main components: **Header**, **Search** and **CharacterGrid**
+When the page is loaded for the first time, the *useState* hook is used to initialize the *items*, *isLoading* and *query* variables. The *items* variable is set to an empty array, *isLoading* is set to ```true``` and query is set to an empty string.
 
-### `npm test`
+After that, the *useEffect* hook and the *axios* package are used to retrieve the data (in JSON format) from [www.breakingbadapi.com](https://www.breakingbadapi.com) and store it in the *result* variable.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+However, since this may take some time, while that happens, the **CharacterGrid** component takes the *isLoading* variable as a prop and, since it is set to ``true``, the **Spinner**  component (which is a functional component), returns the spinner gif image.
 
-### `npm run build`
+Once the data is loaded, we use the *setItems* method (from the *useState* hook) to set the items variable and store *result.data* into it and *isLoading* is set to ``false`` using the *setIsLoading* method of the *useState* hook.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Also, since *isLoading* is *false* now, we loop through each one of the elements in *items* (which we will just call *item*) and we pass its id *item.char_id* and the item itself (*item*) as  props to the **CharacterItem**.  The **CharacterItem** takes *item* as an argument and styles each one of its variables in a nice, visually appealing format, using Bootstrap 4 and custom CSS code, as a card.  (which uses the CSS transform property to rotate the element when you hover over a card).
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+As for the **Search** component: it returns, in JSX, a form with an input that uses *event.target.value* and the *useState* hook to edit the *query* variable. This variable is passed as a prop to *App.js* and is used to fetch the data that the user is requesting.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Built with
 
-### `npm run eject`
+To build this project, I used:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- React & React hooks
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- The breaking bad API [www.breakingbadapi.com](https://www.breakingbadapi.com)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Linux
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Nginx
 
-## Learn More
+- AWS EC2
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Screenshot
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![Screenshot](./screenshot.png")
